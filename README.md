@@ -9,11 +9,12 @@
 
 The exercises I did in training courses.
 
-### [Quera College](https://quera.org/college)
+- ### [Quera College](https://quera.org/college)
 
-#### [fundamentals of programming and algorithmic thinking](https://quera.org/college/land/college/2572)
-
-See [this link](Quera/fundamentals-of-programming-and-algorithmic-thinking).
+  - #### Fundamentals of Programming and Algorithmic Thinking
+      [College link](https://quera.org/college/land/college/2572)
+    
+      [My Solutions](Quera/fundamentals-of-programming-and-algorithmic-thinking)
 
 ## Support
 
