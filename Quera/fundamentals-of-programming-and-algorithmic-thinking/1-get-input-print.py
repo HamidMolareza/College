@@ -1,6 +1,11 @@
 def get_input(message: str):
-    print(message, end='')
-    return input()
+    while True:
+        # print(message, end='')
+        user_input = input(message)
+        if user_input.strip():
+            return user_input
+        else:
+            print("Input can not be empty. Please try again.")
 
 
 name = get_input("name: ")
