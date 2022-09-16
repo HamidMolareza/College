@@ -1,28 +1,19 @@
 # College
 
-[Ask a Question](https://github.com/HamidMolareza/College/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+)
+[Ask a Question](https://github.com/HamidMolareza/College/issues/new?assignees=&labels=help-wanted&title=support%3A+)
 
 ![GitHub](https://img.shields.io/github/license/HamidMolareza/College)
-
 [![code with love by HamidMolareza](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-HamidMolareza-ff1414.svg?style=flat-square)](https://github.com/HamidMolareza)
 
 ## About
 
-> **[?]**
-> Provide general information about your project here.
-> Put a meaningful, short, plain-language description of:
-> What problem does it (intend to) solve?
-> What is the purpose of your project?
-> What this project is trying to accomplish and why it matters?
-> Why did you undertake it?
-> Describe the problem(s) this project solves.
-> Describe how this software can improve the lives of its audience.
-> Describe what sets this apart from related-projects.
-> You don't have to answer all the questions -- just the ones relevant to your project.
+The exercises I did in training courses.
 
-## Roadmap
+### [Quera College](https://quera.org/college)
 
-See the [open issues](https://github.com/HamidMolareza/College/issues) for a list of proposed features (and known issues).
+#### [fundamentals of programming and algorithmic thinking](https://quera.org/college/land/college/2572)
+
+See [this link](Quera/fundamentals-of-programming-and-algorithmic-thinking).
 
 ## Support
 
