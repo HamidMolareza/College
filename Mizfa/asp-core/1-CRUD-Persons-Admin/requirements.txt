@@ -1,0 +1,28 @@
+Operations: 
+Create (pop-up)
+Read + Pagination
+Update (pop-up)
+Delete (in table)
+Detail (pop-up)
+quick search (server side)
+full search (server side)
+
+Data:
+- full name
+- gender
+- profile image
+- is student (bool)
+- How to get to know us (selection + description field if is need)
+- birthday + calclulate age
+
+Database: Postgres
+Backend: Asp Core
+
+Front-End: React
++ Redux
++ Router
+
+Dockerize project
+
+Test on real server
+Update Readme
