@@ -1,11 +1,13 @@
+Language: persian
+
 Operations: 
-Create (pop-up)
-Read + Pagination
-Update (pop-up)
-Delete (in table)
-Detail (pop-up)
-quick search (server side)
-full search (server side)
+- Create (pop-up)
+- Read + Pagination
+- Update (pop-up)
+- Delete (in table)
+- Detail (pop-up)
+- quick search (server side)
+- full search (server side)
 
 Data:
 - full name
