@@ -1,4 +1,5 @@
 Language: persian
+Font: iransans
 
 Operations: 
 - Create (pop-up)
@@ -22,7 +23,6 @@ Backend: Asp Core
 
 Front-End: React
 + Redux
-+ Router
 
 Dockerize project
 
