@@ -14,6 +14,17 @@ The exercises I did in training courses.
 - [College link](https://quera.org/college/land/college/6092/)
 - [My Solutions](Quera/front-end)
 
+### Mizfa| ASP Core
+
+- [College link](https://mizfa.academy/product/simple-asp-net-core2-training/)
+- [My Solutions](Mizfa/asp-core)
+
+### Personal| Nodejs and Postgres
+
+Simple CRUD operation:
+
+- [My Solutions](Personal/nodejs-postgres)
+
 ## Support
 
 Reach out to the maintainer at one of the following places:
