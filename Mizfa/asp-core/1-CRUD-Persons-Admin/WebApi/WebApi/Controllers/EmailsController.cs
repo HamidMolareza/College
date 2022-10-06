@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Models.Db;
+using WebApi.Models.ViewModels;
 
 namespace WebApi.Controllers {
     [Route("api/[controller]")]
@@ -16,66 +14,64 @@ namespace WebApi.Controllers {
             _context = context;
         }
 
-        // GET: api/Emails
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EmailDb>>> GetEmails() {
-            return await _context.Emails.ToListAsync();
+        public async Task<List<EmailOutputViewModel>> GetEmails() {
+            return (await _context.Emails.AsNoTracking().ToListAsync())
+                .Select(EmailOutputViewModel.ConvertToViewModel)
+                .ToList();
         }
 
-        // GET: api/Emails/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EmailDb>> GetEmailDb(Guid id) {
+        public async Task<ActionResult<EmailOutputViewModel>> GetEmail(Guid id) {
             var emailDb = await _context.Emails.FindAsync(id);
 
-            if (emailDb == null) {
+            if (emailDb == null)
                 return NotFound();
-            }
 
-            return emailDb;
+            return EmailOutputViewModel.ConvertToViewModel(emailDb);
         }
 
-        // PUT: api/Emails/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmailDb(Guid id, EmailDb emailDb) {
-            if (id != emailDb.Id) {
-                return BadRequest();
-            }
+        public async Task<IActionResult> PutEmail(Guid id, EmailInputViewModel email) {
+            var emailDb = await _context.Emails.FindAsync(id);
+            if (emailDb == null)
+                return NotFound();
 
-            _context.Entry(emailDb).State = EntityState.Modified;
+            if (await _context.Emails.AnyAsync(db => db.Email.ToLower() == email.Email))
+                return Conflict();
 
-            try {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException) {
-                if (!EmailDbExists(id)) {
-                    return NotFound();
-                }
-                else {
-                    throw;
-                }
-            }
+            emailDb.Email = email.Email;
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        // POST: api/Emails
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<EmailDb>> PostEmailDb(EmailDb emailDb) {
+        public async Task<ActionResult<EmailDb>> PostEmailDb(Guid personId, EmailInputViewModel email) {
+            var person = await _context.Persons.FindAsync(personId);
+            if (person is null)
+                return NotFound();
+
+            if (await _context.Emails.AnyAsync(db => db.Email.ToLower() == email.Email))
+                return Conflict();
+
+            var emailDb = new EmailDb {
+                Id = new Guid(),
+                Email = email.Email,
+                PersonId = personId
+            };
             _context.Emails.Add(emailDb);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmailDb", new {id = emailDb.Id}, emailDb);
+            return CreatedAtAction(nameof(GetEmail), new {id = emailDb.Id},
+                EmailOutputViewModel.ConvertToViewModel(emailDb));
         }
 
-        // DELETE: api/Emails/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmailDb(Guid id) {
             var emailDb = await _context.Emails.FindAsync(id);
-            if (emailDb == null) {
+            if (emailDb == null)
                 return NotFound();
-            }
 
             _context.Emails.Remove(emailDb);
             await _context.SaveChangesAsync();
@@ -83,8 +79,24 @@ namespace WebApi.Controllers {
             return NoContent();
         }
 
-        private bool EmailDbExists(Guid id) {
-            return _context.Emails.Any(e => e.Id == id);
+        [HttpPost("SetPrimary")]
+        public async Task<ActionResult> SetPrimaryEmail(Guid id) {
+            var emailDb = await _context.Emails.FindAsync(id);
+            
+            if (emailDb == null)
+                return NotFound();
+            if (emailDb.IsPrimary)
+                return NoContent();
+
+            emailDb.IsPrimary = true;
+
+            var oldPrimaryEmail = await _context.Emails.Where(email => email.IsPrimary).SingleOrDefaultAsync();
+            if (oldPrimaryEmail is not null)
+                oldPrimaryEmail.IsPrimary = false;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
