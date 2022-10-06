@@ -1,5 +1,4 @@
 using WebApi.Data;
-using WebApi.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
