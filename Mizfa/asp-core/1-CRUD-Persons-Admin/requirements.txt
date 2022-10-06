@@ -11,12 +11,15 @@ Operations:
 - full search (server side)
 
 Data:
-- full name
-- gender
-- profile image
+- Name
+- Family
+- Gender (Male, Femail)
+- profile image (one to many)
 - is student (bool)
 - How to get to know us (selection + description field if is need)
 - birthday + calclulate age
+- Phone (one to many)
+- RegisterDate
 
 Database: Postgres
 Backend: Asp Core
