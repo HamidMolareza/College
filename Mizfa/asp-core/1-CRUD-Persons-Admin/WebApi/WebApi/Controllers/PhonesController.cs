@@ -72,6 +72,12 @@ namespace WebApi.Controllers {
             if (phoneDb == null)
                 return NotFound();
 
+            if (phoneDb.IsPrimary) {
+                ModelState.AddModelError("can_not_delete_primary_phone",
+                    "Can not delete primary phone. To delete this phone, please select another phone as the primary.");
+                return BadRequest(ModelState);
+            }
+
             _context.Phones.Remove(phoneDb);
             await _context.SaveChangesAsync();
 

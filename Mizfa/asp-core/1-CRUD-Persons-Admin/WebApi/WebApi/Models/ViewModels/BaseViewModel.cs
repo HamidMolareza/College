@@ -1,4 +1,4 @@
-namespace WebApi.Models.ViewModels; 
+namespace WebApi.Models.ViewModels;
 
 public class BaseViewModel {
     public DateTime CreatedDate { get; set; }
