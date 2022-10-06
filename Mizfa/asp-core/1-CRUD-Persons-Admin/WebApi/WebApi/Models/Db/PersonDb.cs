@@ -17,10 +17,11 @@ public class PersonDb : BaseDb {
     [MaxLength(100)] public string? Family { get; set; }
     public string FullName => string.IsNullOrEmpty(Family) ? Name : Name + " " + Family;
 
+    [Required]
     [RegularExpression("[a-zA-Z0-9_]+")]
     [MinLength(4)]
     [MaxLength(50)]
-    public string Username { get; set; }
+    public string Username { get; set; } = null!;
 
     public GenderType? Gender { get; set; }
     public bool IsStudent { get; set; }
