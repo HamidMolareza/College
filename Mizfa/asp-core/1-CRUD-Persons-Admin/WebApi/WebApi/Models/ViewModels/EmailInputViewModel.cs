@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WebApi.Models.ViewModels; 
+namespace WebApi.Models.ViewModels;
 
 public class EmailInputViewModel {
     [EmailAddress]

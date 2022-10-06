@@ -34,10 +34,11 @@ namespace WebApi.Controllers {
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmail(Guid id, EmailInputViewModel email) {
             var emailDb = await _context.Emails.FindAsync(id);
-            
+
             if (emailDb == null)
                 return NotFound();
-            if (await _context.Emails.AnyAsync(db => string.Equals(db.Email, email.Email, StringComparison.CurrentCultureIgnoreCase)))
+            if (await _context.Emails.AnyAsync(db =>
+                    string.Equals(db.Email, email.Email, StringComparison.CurrentCultureIgnoreCase)))
                 return Conflict();
 
             emailDb.Email = email.Email;
@@ -52,7 +53,8 @@ namespace WebApi.Controllers {
             if (person is null)
                 return NotFound();
 
-            if (await _context.Emails.AnyAsync(db => string.Equals(db.Email, email.Email, StringComparison.CurrentCultureIgnoreCase)))
+            if (await _context.Emails.AnyAsync(db =>
+                    string.Equals(db.Email, email.Email, StringComparison.CurrentCultureIgnoreCase)))
                 return Conflict();
 
             var emailDb = new EmailDb {
@@ -73,6 +75,12 @@ namespace WebApi.Controllers {
             if (emailDb == null)
                 return NotFound();
 
+            if (emailDb.IsPrimary) {
+                ModelState.AddModelError("can_not_delete_primary_email",
+                    "Can not delete primary email. To delete this email, please select another email as the primary.");
+                return BadRequest(ModelState);
+            }
+
             _context.Emails.Remove(emailDb);
             await _context.SaveChangesAsync();
 
@@ -82,7 +90,7 @@ namespace WebApi.Controllers {
         [HttpPost("SetPrimary")]
         public async Task<ActionResult> SetPrimaryEmail(Guid id) {
             var emailDb = await _context.Emails.FindAsync(id);
-            
+
             if (emailDb == null)
                 return NotFound();
             if (emailDb.IsPrimary)
