@@ -25,8 +25,8 @@ public class PersonDb : BaseDb {
     public GenderType? Gender { get; set; }
     public bool IsStudent { get; set; }
     [MaxLength(300)] public string? HowToKnowUs { get; set; }
-    [DataType(DataType.Date)] public DateTime Birthday { get; set; }
-    public int Age => DateTimeUtility.CalculateAge(Birthday, DateTime.UtcNow);
+    [DataType(DataType.Date)] public DateTime? Birthday { get; set; }
+    public int? Age => DateTimeUtility.CalculateAge(Birthday, DateTime.UtcNow);
     public DateTime RegisterDate { get; set; }
 
     public ICollection<ProfileImageDb> ProfileImagePaths { get; set; }

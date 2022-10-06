@@ -1,0 +1,16 @@
+#Sample ConnectionString: server=localhost;port=35000;user=root;password=mysql;database=LeetCode
+
+version: "3.9"
+
+services:
+  mysql:
+    container_name: 'mysql'
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "mysql"
+      MYSQL_DATABASE: "LeetCode"
+    restart: always
+    ports:
+      - "35000:3306"
+#    volumes:
+#      - '${PWD}/data/db:/var/lib/mysql'

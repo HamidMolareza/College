@@ -8,10 +8,7 @@ public class PhoneDb : BaseDb {
     [Key]
     public Guid Id { get; set; }
 
-    [Phone]
-    [MinLength(5)]
-    [MaxLength(30)]
-    public string PhoneNumber { get; set; }
+    [Phone] [MinLength(5)] [MaxLength(30)] public string PhoneNumber { get; set; }
     public bool IsPrimary { get; set; }
 
     public PersonDb Person { get; set; }
