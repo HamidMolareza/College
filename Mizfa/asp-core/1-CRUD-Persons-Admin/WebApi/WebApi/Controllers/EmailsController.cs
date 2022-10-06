@@ -34,10 +34,10 @@ namespace WebApi.Controllers {
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmail(Guid id, EmailInputViewModel email) {
             var emailDb = await _context.Emails.FindAsync(id);
+            
             if (emailDb == null)
                 return NotFound();
-
-            if (await _context.Emails.AnyAsync(db => db.Email.ToLower() == email.Email))
+            if (await _context.Emails.AnyAsync(db => string.Equals(db.Email, email.Email, StringComparison.CurrentCultureIgnoreCase)))
                 return Conflict();
 
             emailDb.Email = email.Email;
@@ -52,7 +52,7 @@ namespace WebApi.Controllers {
             if (person is null)
                 return NotFound();
 
-            if (await _context.Emails.AnyAsync(db => db.Email.ToLower() == email.Email))
+            if (await _context.Emails.AnyAsync(db => string.Equals(db.Email, email.Email, StringComparison.CurrentCultureIgnoreCase)))
                 return Conflict();
 
             var emailDb = new EmailDb {
