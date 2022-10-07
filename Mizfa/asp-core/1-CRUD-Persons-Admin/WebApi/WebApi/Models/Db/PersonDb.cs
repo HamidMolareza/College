@@ -30,9 +30,9 @@ public class PersonDb : BaseDb {
     public int? Age => DateTimeUtility.CalculateAge(Birthday, DateTime.UtcNow);
     public DateTime RegisterDate { get; set; }
 
-    public ICollection<ProfileImageDb> ProfileImagePaths { get; set; }
-    public ICollection<EmailDb> Emails { get; set; }
-    public ICollection<PhoneDb> Phones { get; set; }
+    public ICollection<ProfileImageDb> ProfileImages { get; set; }
+    public List<EmailDb> Emails { get; set; }
+    public List<PhoneDb> Phones { get; set; }
 }
 
 public enum GenderType {

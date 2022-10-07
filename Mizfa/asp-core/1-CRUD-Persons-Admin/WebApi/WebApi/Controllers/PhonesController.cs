@@ -55,7 +55,7 @@ namespace WebApi.Controllers {
                 return Conflict();
 
             var phoneDb = new PhoneDb {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 PhoneNumber = phone.PhoneNumber,
                 PersonId = personId
             };

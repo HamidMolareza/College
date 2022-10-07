@@ -21,7 +21,7 @@ namespace WebApi.Controllers {
                 .ToList();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         public async Task<ActionResult<EmailOutputViewModel>> GetEmail(Guid id) {
             var emailDb = await _context.Emails.FindAsync(id);
 
@@ -31,7 +31,7 @@ namespace WebApi.Controllers {
             return EmailOutputViewModel.ConvertToViewModel(emailDb);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:guid}")]
         public async Task<IActionResult> PutEmail(Guid id, EmailInputViewModel email) {
             var emailDb = await _context.Emails.FindAsync(id);
 
@@ -58,7 +58,7 @@ namespace WebApi.Controllers {
                 return Conflict();
 
             var emailDb = new EmailDb {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Email = email.Email,
                 PersonId = personId
             };
@@ -69,7 +69,7 @@ namespace WebApi.Controllers {
                 EmailOutputViewModel.ConvertToViewModel(emailDb));
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteEmailDb(Guid id) {
             var emailDb = await _context.Emails.FindAsync(id);
             if (emailDb == null)

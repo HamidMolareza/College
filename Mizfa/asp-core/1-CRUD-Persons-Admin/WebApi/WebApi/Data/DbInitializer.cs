@@ -11,7 +11,7 @@ public static class DbInitializer {
         try {
             var context = services.GetRequiredService<PersonContext>();
             await SeedAsync(context);
-            await context.Database.MigrateAsync();
+            await context.Database.MigrateAsync(); //TODO: ?
         }
         catch (Exception ex) {
             var logger = services.GetRequiredService<ILogger<Program>>();
@@ -26,8 +26,8 @@ public static class DbInitializer {
             return; // DB has been seeded
         }
 
-        var person1Id = new Guid();
-        var person2Id = new Guid();
+        var person1Id = Guid.NewGuid();
+        var person2Id = Guid.NewGuid();
 
         var persons = new PersonDb[] {
             new() {

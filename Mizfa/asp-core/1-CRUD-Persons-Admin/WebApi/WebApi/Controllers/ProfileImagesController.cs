@@ -27,7 +27,8 @@ namespace WebApi.Controllers {
         public async Task<ActionResult<IEnumerable<ProfileImageOutputViewModel>>> GetProfileImages() {
             return (await _context.ProfileImages.ToListAsync())
                 .Select(profileImage =>
-                    ProfileImageOutputViewModel.ConvertToViewModel(profileImage, AddHttp(Request.Headers["Host"])))
+                    ProfileImageOutputViewModel.ConvertToViewModel(profileImage,
+                        UrlUtility.AddHttp(Request.Headers["Host"])))
                 .ToList();
         }
 
@@ -38,7 +39,8 @@ namespace WebApi.Controllers {
             if (profileImageDb == null)
                 return NotFound();
 
-            return ProfileImageOutputViewModel.ConvertToViewModel(profileImageDb, AddHttp(Request.Headers["Host"]));
+            return ProfileImageOutputViewModel.ConvertToViewModel(profileImageDb,
+                UrlUtility.AddHttp(Request.Headers["Host"]));
         }
 
         [HttpPost("{personId:guid}")]
@@ -65,7 +67,7 @@ namespace WebApi.Controllers {
             await file.CopyToAsync(stream);
 
             var profileImage = new ProfileImageDb {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 PersonId = person.Id,
                 ImagePath = fileName
             };
@@ -73,17 +75,12 @@ namespace WebApi.Controllers {
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetProfileImage), new {id = profileImage.Id},
-                ProfileImageOutputViewModel.ConvertToViewModel(profileImage, AddHttp(Request.Headers["Host"])));
+                ProfileImageOutputViewModel.ConvertToViewModel(profileImage,
+                    UrlUtility.AddHttp(Request.Headers["Host"])));
         }
 
         private string GetFilePath(string fileName) =>
             Path.Combine(_appEnvironment.WebRootPath, fileName);
-
-        private static string AddHttp(string url) {
-            url = url.ToLower();
-            return url.StartsWith("http") ? url : "https://" + url;
-        }
-
 
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteProfileImage(Guid id) {
