@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
-using WebApi.Models;
+using WebApi.Models.Configs;
 
 namespace WebApi.Utility;
 
 public static class DatabaseUtility {
     public static IServiceCollection AddDatabase(this WebApplicationBuilder builder) {
-        var databaseData = new DatabaseAppSetting();
-        builder.Configuration.GetSection(DatabaseAppSetting.SectionName).Bind(databaseData);
+        var databaseData = new DatabaseConfig();
+        builder.Configuration.GetSection(DatabaseConfig.SectionName).Bind(databaseData);
 
         builder.Services.AddDbContext<PersonContext>(options =>
             options.UseDatabase(databaseData.Type, databaseData.ConnectionString));

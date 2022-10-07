@@ -12,7 +12,7 @@ public class PersonContext : DbContext {
     public DbSet<EmailDb> Emails { get; set; }
     public DbSet<PhoneDb> Phones { get; set; }
     public DbSet<ProfileImageDb> ProfileImages { get; set; }
-    
+
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new()) {
         UpdateEntries(ChangeTracker);
         return base.SaveChangesAsync(cancellationToken);
@@ -39,12 +39,13 @@ public class PersonContext : DbContext {
                         break;
                 }
             }
-            
+
             foreach (var propertyInfo in changedEntity.Entity.GetType().GetProperties()) {
                 if (propertyInfo.PropertyType == typeof(DateTime)) {
                     ConvertToUtc(changedEntity.Entity, propertyInfo);
-                }else if (propertyInfo.PropertyType == typeof(DateTime?) &&
-                          ((DateTime?) propertyInfo.GetValue(changedEntity.Entity)).HasValue) {
+                }
+                else if (propertyInfo.PropertyType == typeof(DateTime?) &&
+                         ((DateTime?) propertyInfo.GetValue(changedEntity.Entity)).HasValue) {
                     ConvertToUtc(changedEntity.Entity, propertyInfo);
                 }
             }
@@ -52,6 +53,7 @@ public class PersonContext : DbContext {
     }
 
     private static void ConvertToUtc(object entity, PropertyInfo propertyInfo) {
-        propertyInfo.SetValue(entity, DateTime.SpecifyKind((DateTime) propertyInfo.GetValue(entity)!, DateTimeKind.Utc));
+        propertyInfo.SetValue(entity,
+            DateTime.SpecifyKind((DateTime) propertyInfo.GetValue(entity)!, DateTimeKind.Utc));
     }
 }

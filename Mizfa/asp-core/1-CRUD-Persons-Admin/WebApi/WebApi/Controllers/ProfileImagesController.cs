@@ -1,87 +1,103 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
+using WebApi.Models.Configs;
 using WebApi.Models.Db;
+using WebApi.Models.ViewModels;
+using WebApi.Utility;
 
 namespace WebApi.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class ProfileImagesController : ControllerBase {
         private readonly PersonContext _context;
+        private readonly FilesValidationConfig _filesValidationConfig;
+        private readonly IWebHostEnvironment _appEnvironment;
 
-        public ProfileImagesController(PersonContext context) {
+        public ProfileImagesController(PersonContext context, IConfiguration configuration,
+            IWebHostEnvironment appEnvironment) {
             _context = context;
+            _filesValidationConfig =
+                configuration.GetSection(FilesValidationConfig.SectionName).Get<FilesValidationConfig>();
+            _appEnvironment = appEnvironment;
         }
 
-        // GET: api/ProfileImages
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProfileImageDb>>> GetProfileImages() {
-            return await _context.ProfileImages.ToListAsync();
+        public async Task<ActionResult<IEnumerable<ProfileImageOutputViewModel>>> GetProfileImages() {
+            return (await _context.ProfileImages.ToListAsync())
+                .Select(profileImage =>
+                    ProfileImageOutputViewModel.ConvertToViewModel(profileImage, AddHttp(Request.Headers["Host"])))
+                .ToList();
         }
 
-        // GET: api/ProfileImages/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ProfileImageDb>> GetProfileImageDb(Guid id) {
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<ProfileImageOutputViewModel>> GetProfileImage(Guid id) {
             var profileImageDb = await _context.ProfileImages.FindAsync(id);
 
-            if (profileImageDb == null) {
+            if (profileImageDb == null)
                 return NotFound();
-            }
 
-            return profileImageDb;
+            return ProfileImageOutputViewModel.ConvertToViewModel(profileImageDb, AddHttp(Request.Headers["Host"]));
         }
 
-        // PUT: api/ProfileImages/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProfileImageDb(Guid id, ProfileImageDb profileImageDb) {
-            if (id != profileImageDb.Id) {
-                return BadRequest();
+        [HttpPost("{personId:guid}")]
+        public async Task<ActionResult> PostProfileImage(Guid personId, [Required] IFormFile file) {
+            if (file.Length < _filesValidationConfig.MinimumSize || file.Length > _filesValidationConfig.MaximumSize) {
+                ModelState.AddModelError("Size_Error",
+                    $"The file size must between {_filesValidationConfig.MinimumSize} and {_filesValidationConfig.MaximumSize}");
+                return BadRequest(ModelState);
             }
 
-            _context.Entry(profileImageDb).State = EntityState.Modified;
+            //TODO: Check file type
 
-            try {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException) {
-                if (!ProfileImageDbExists(id)) {
-                    return NotFound();
-                }
-                else {
-                    throw;
-                }
+            var person = await _context.Persons.FindAsync(personId);
+            if (person is null) {
+                ModelState.AddModelError(nameof(personId), "Can not find person.");
+                return NotFound(ModelState);
             }
 
-            return NoContent();
-        }
+            var fileExtenstion = FileUtility.GetFileExtenstion(file.ContentType);
+            var fileName = SecurityUtility.GetSecureGuid() + $".{fileExtenstion}";
+            var resultPath = GetFilePath(fileName);
 
-        // POST: api/ProfileImages
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<ProfileImageDb>> PostProfileImageDb(ProfileImageDb profileImageDb) {
-            _context.ProfileImages.Add(profileImageDb);
+            await using var stream = System.IO.File.Create(resultPath);
+            await file.CopyToAsync(stream);
+
+            var profileImage = new ProfileImageDb {
+                Id = new Guid(),
+                PersonId = person.Id,
+                ImagePath = fileName
+            };
+            _context.ProfileImages.Add(profileImage);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProfileImageDb", new {id = profileImageDb.Id}, profileImageDb);
+            return CreatedAtAction(nameof(GetProfileImage), new {id = profileImage.Id},
+                ProfileImageOutputViewModel.ConvertToViewModel(profileImage, AddHttp(Request.Headers["Host"])));
         }
 
-        // DELETE: api/ProfileImages/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProfileImageDb(Guid id) {
+        private string GetFilePath(string fileName) =>
+            Path.Combine(_appEnvironment.WebRootPath, fileName);
+
+        private static string AddHttp(string url) {
+            url = url.ToLower();
+            return url.StartsWith("http") ? url : "https://" + url;
+        }
+
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteProfileImage(Guid id) {
             var profileImageDb = await _context.ProfileImages.FindAsync(id);
-            if (profileImageDb == null) {
+            if (profileImageDb == null)
                 return NotFound();
-            }
+
+            var filePath = GetFilePath(profileImageDb.ImagePath);
+            System.IO.File.Delete(filePath);
 
             _context.ProfileImages.Remove(profileImageDb);
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool ProfileImageDbExists(Guid id) {
-            return _context.ProfileImages.Any(e => e.Id == id);
         }
     }
 }

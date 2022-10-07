@@ -46,7 +46,7 @@ namespace WebApi.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<PhoneOutputViewModel>> PostPhoneDb(Guid personId, phoneInputViewModel phone) {
+        public async Task<ActionResult<PhoneOutputViewModel>> PostPhone(Guid personId, phoneInputViewModel phone) {
             var person = await _context.Persons.FindAsync(personId);
             if (person is null)
                 return NotFound();
