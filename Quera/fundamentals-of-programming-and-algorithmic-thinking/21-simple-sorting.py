@@ -17,10 +17,19 @@ def selection_sort(numbers: List[int], reverse=False) -> List[int]:
     return numbers
 
 
+def bubble_sort(numbers: List[int], reverse=False) -> List[int]:
+    for i in range(len(numbers) - 1):
+        for j in range(i + 1, len(numbers)):
+            if (not reverse and numbers[i] > numbers[j]) or (reverse and numbers[i] < numbers[j]):
+                numbers[i], numbers[j] = numbers[j], numbers[i]
+    return numbers
+
+
 def main():
     input()  # num of numbers (skip)
     numbers = list(map(int, input().split()))
     print(selection_sort(numbers, False))
+    print(bubble_sort(numbers, False))
 
 
 main()
