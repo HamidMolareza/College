@@ -1,0 +1,146 @@
+/* ====== General ====== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url("./assets/Vazir.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url("./assets/Vazir-Bold.ttf");
+    font-weight: bold;
+}
+
+html {
+    font-size: 13px;
+}
+
+body {
+    direction: rtl;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: Vazir, Tahoma, Helvetica, sans-serif;
+    background: #f0f0f0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 68rem;
+    margin: 1.5rem auto;
+    display: flex;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.text-sm {
+    font-size: 11px;
+}
+
+.text-lg {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.text-xl {
+    font-size: 3rem;
+}
+
+/* ====== Sidebar ====== */
+.sidebar {
+    position: relative;
+    color: #fff;
+    padding: 1.5em 1.5em 30em;
+    width: 31.25%;
+    display: inline-block;
+}
+
+.sidebar-back-color {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: #00658d;
+    z-index: -1;
+}
+
+.sidebar-back-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: url('./assets/quera.svg') center bottom -22rem / 300% no-repeat;
+    z-index: -1;
+}
+
+.avatar {
+    margin-bottom: 10px;
+}
+
+.avatar img {
+    border-radius: 0.3125em;
+    max-width: 100%;
+    border: 0.25em solid #fff;
+}
+
+.sidebar-section {
+    margin-bottom: 22px;
+}
+
+.sidebar-section .row {
+    margin-bottom: 8px;
+}
+
+.contact-info i {
+    padding-left: 10px;
+}
+
+.contact-info .row {
+    display: flex;
+    align-items: center;
+}
+
+.personal-info .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.key {
+    font-size: 11px;
+}
+
+.value {
+    font-weight: bold;
+}
+
+/* ====== Main ====== */
+.main {
+    padding-right: 26px;
+    padding-top: 20px;
+    width: 68.75%;
+    background-color: #fff;
+}
+
+.name {
+    margin: 3em 3em 5em 0;
+}
+
+.name small {
+    color: #00658d;
+    font-size: 19px;
+    font-weight: 700;
+}
