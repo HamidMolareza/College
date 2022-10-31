@@ -1,3 +1,5 @@
+# https://quera.org/college/2572/chapter/7140/lesson/104221
+
 _, num_of_ascending_sequence = map(int, input().split())
 sequence = [int(x) for x in input().split()]
 

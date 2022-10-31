@@ -1,3 +1,5 @@
+# https://quera.org/college/2572/chapter/7140/lesson/34049
+
 def get_commands():
     num_of_commands = int(input())
     commands = []
