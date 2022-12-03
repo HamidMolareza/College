@@ -4,14 +4,14 @@ export default function Design4() {
     return (
         <Box sx={(theme) => ({
             height: "100%",
+            display: "flex",
+            flexDirection: "Column",
+            justifyContent: "center",
             [theme.breakpoints.down("laptop")]: {
-                display: "flex",
-                flexDirection: "Column",
-                justifyContent: "center",
                 alignItems: "center",
                 textAlign: "center",
             },
-            [theme.breakpoints.only("tablet")]: {
+            [theme.breakpoints.up("tablet")]: {
                 gap: "20px"
             }
         })}>
@@ -26,11 +26,7 @@ export default function Design4() {
                     width: "750px"
                 },
                 [theme.breakpoints.up("laptop")]: {
-                    position: "absolute",
-                    width: "562px",
-                    height: "348px",
-                    top: "calc((85vh/2) - (348px/2))",
-                    left: "12vh",
+                    marginLeft: "12vh",
                     lineHeight: "116px"
                 },
                 [theme.breakpoints.up("desktop")]: {
@@ -55,11 +51,7 @@ export default function Design4() {
                     fontSize: "3rem",
                 },
                 [theme.breakpoints.up("laptop")]: {
-                    position: "absolute",
-                    width: "610px",
-                    height: "58px",
-                    top: "calc((85vh/2) - 58px/2 + 220px)",
-                    left: "12vh",
+                    marginLeft: "12vh",
                 },
             })}>This is a sample subtitle</Typography>
         </Box>
