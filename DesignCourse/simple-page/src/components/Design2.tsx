@@ -1,6 +1,6 @@
 import {Box, Typography} from "@mui/material";
 
-export default function Design1() {
+export default function Design2() {
     return (
         <Box sx={{
             display: "flex",
@@ -11,9 +11,10 @@ export default function Design1() {
         }}>
             <div>
                 <Typography variant="h1" sx={{
-                    fontSize: ["2rem", "4rem"],
+                    fontSize: ["2rem", "4rem"]
                 }}>The Greatest Show</Typography>
                 <Typography variant="subtitle1" sx={{
+                    color: "#444444",
                     fontSize: ["1.1rem", "2rem"]
                 }}>This is a sample subtitle</Typography>
             </div>
