@@ -15,12 +15,17 @@ export default function Design5() {
                 gap: "20px"
             }
         })}>
-            <Box sx={{
-                display: ["none", "none", "block"],
+            <Box sx={(theme)=>({
+                display: ["none", "block"],
                 width: "150px",
                 height: "100%",
                 backgroundColor: "#F0F0F0",
-            }}
+                [theme.breakpoints.only("tablet")]:{
+                    width: "3vh",
+                    position: "absolute",
+                    left: 0
+                }
+            })}
             >
 
             </Box>
@@ -38,13 +43,13 @@ export default function Design5() {
                     margin: "auto",
                     marginLeft: "110px",
                     marginRight: "100px",
-                    width: "330px",
+                    width: "310px",
                     direction: "rtl"
                 },
                 [theme.breakpoints.up("desktop")]: {
                     lineHeight: "116px",
                     fontSize: "8rem",
-                    width: "650px"
+                    width: "620px"
                 },
             })}>
                 <Box sx={{
@@ -64,6 +69,10 @@ export default function Design5() {
                 [theme.breakpoints.up("laptop")]: {
                     margin: "auto 0px",
                     fontSize: "1.3rem"
+                },
+                [theme.breakpoints.up("desktop")]: {
+                    margin: "auto 0px",
+                    fontSize: "2rem"
                 },
             })}>This is a sample subtitle</Typography>
         </Box>
