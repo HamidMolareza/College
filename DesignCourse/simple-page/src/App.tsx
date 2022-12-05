@@ -6,8 +6,9 @@ import Design2 from "./components/Design2";
 import Design3 from "./components/Design3";
 import Design4 from "./components/Design4";
 import Design5 from "./components/Design5";
+import Design6 from "./components/Design6";
 
-const pages = [Design1, Design2, Design3, Design4, Design5];
+const pages = [Design1, Design2, Design3, Design4, Design5, Design6];
 
 export default function App() {
     const [activePage, setActivePage] = useState<number>(pages.length);

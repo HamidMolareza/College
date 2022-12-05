@@ -1,6 +1,6 @@
 import {Box, Typography} from "@mui/material";
 
-export default function Design5() {
+export default function Design6() {
     return (
         <Box sx={(theme) => ({
             height: "100%",
@@ -16,14 +16,15 @@ export default function Design5() {
             }
         })}>
             <Box sx={(theme) => ({
-                display: ["none", "block"],
-                width: "150px",
-                height: "100%",
-                backgroundColor: "#F0F0F0",
-                [theme.breakpoints.only("tablet")]: {
-                    width: "3vh",
+                display: "none",
+                [theme.breakpoints.up("tablet")]: {
+                    display: "block",
+                    height: "85vh",
+                    backgroundColor: "#F0F0F0",
                     position: "absolute",
-                    left: 0
+                    left: 0,
+                    width: [0, "60%", "340px", "563px"],
+                    zIndex: -1
                 }
             })}/>
             <Typography variant="h1" sx={(theme) => ({
