@@ -41,35 +41,32 @@ export interface IAppbarProps {
 
 export default function CustomAppBar(props: IAppbarProps) {
     return (
-        <Box sx={{
-            display: ["block", "block", "none"]
-        }}>
-            <HideAppBar>
-                <Box sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    margin: "auto",
-                    gap: "10px"
-                }}>
-                    <ArrowRightAltIcon sx={{
-                        transform: "rotate(180deg)",
-                        width: "35px",
-                        height: "35px",
-                        color: props.hasPrevPage ? "#fff" : "#d0d0d0"
-                    }} onClick={props.prevPage}
-                    />
-                    <Typography variant="h6">
-                        {props.currentPage} of {props.allPages}
-                    </Typography>
-                    <ArrowRightAltIcon sx={{
-                        width: "35px",
-                        height: "35px",
-                        color: props.hasNextPage ? "#fff" : "#d0d0d0"
-                    }} onClick={props.nextPage}
-                    />
-                </Box>
-            </HideAppBar>
-        </Box>
+        <HideAppBar>
+            <Box sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                margin: "auto",
+                gap: "10px",
+                userSelect: "none"
+            }}>
+                <ArrowRightAltIcon sx={{
+                    transform: "rotate(180deg)",
+                    width: "35px",
+                    height: "35px",
+                    color: props.hasPrevPage ? "#fff" : "#d0d0d0"
+                }} onClick={props.prevPage}
+                />
+                <Typography variant="h6">
+                    {props.currentPage} of {props.allPages}
+                </Typography>
+                <ArrowRightAltIcon sx={{
+                    width: "35px",
+                    height: "35px",
+                    color: props.hasNextPage ? "#fff" : "#d0d0d0"
+                }} onClick={props.nextPage}
+                />
+            </Box>
+        </HideAppBar>
     );
 }

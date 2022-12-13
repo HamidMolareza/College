@@ -2,6 +2,8 @@ import React, {useCallback, useState} from 'react';
 import Design1 from "./components/Design1";
 import CustomAppBar from "./components/Appbar";
 import Design2 from "./components/Design2";
+import {Box} from '@mui/material';
+import VerticalNavigation from "./components/VerticalNavigation";
 
 const pages = [Design1, Design2]
 
@@ -20,16 +22,46 @@ export default function App() {
     }, [pageNumber, hasPrevPage]);
 
     return (
-        <div>
-            <CustomAppBar
-                currentPage={pageNumber}
-                allPages={pages.length}
-                nextPage={nextPage}
-                prevPage={prevPage}
-                hasNextPage={hasNextPage}
-                hasPrevPage={hasPrevPage}
-            />
-            {pages[pageNumber - 1]()}
-        </div>
+        <>
+            <Box sx={{
+                display: ["block", "block", "none"]
+            }}>
+                <CustomAppBar
+                    currentPage={pageNumber}
+                    allPages={pages.length}
+                    nextPage={nextPage}
+                    prevPage={prevPage}
+                    hasNextPage={hasNextPage}
+                    hasPrevPage={hasPrevPage}
+                />
+            </Box>
+            <Box sx={theme=>({
+                display: ["none", "none", "block"],
+                position: "fixed",
+                right: "25px",
+                height: "195px",
+                top: "calc(50% - 195px/2)",
+                [theme.breakpoints.up("desktop")]: {
+                    right: "32px",
+                    height: "225px",
+                    top: "calc(50% - 225px/2)",
+                }
+            })}>
+                <VerticalNavigation
+                    currentPage={pageNumber}
+                    allPages={pages.length}
+                    nextPage={nextPage}
+                    prevPage={prevPage}
+                    hasNextPage={hasNextPage}
+                    hasPrevPage={hasPrevPage}
+                />
+            </Box>
+            <Box sx={{
+                marginLeft: [0, 0, "120px", "150px"],
+                marginRight: [0, 0, "120px", "150px"]
+            }}>
+                {pages[pageNumber - 1]()}
+            </Box>
+        </>
     );
 }
