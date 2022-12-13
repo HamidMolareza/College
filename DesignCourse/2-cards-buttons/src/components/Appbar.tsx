@@ -1,36 +1,29 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
 
-type Props = {
-    children: JSX.Element;
-};
-
-function HideOnScroll({children}: Props) {
+function HideOnScroll(props: any) {
     const trigger = useScrollTrigger();
 
     return (
         <Slide appear={false} direction="down" in={!trigger}>
-            {children}
+            {props.children}
         </Slide>
     );
 }
 
-export default function HideAppBar() {
+export default function HideAppBar(props: any) {
     return (
-        <>
+        <div>
             <HideOnScroll>
                 <AppBar>
                     <Toolbar>
-                        <Typography variant="h6" component="div">
-                            Scroll to hide App bar
-                        </Typography>
+                        {props.children}
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
             <Toolbar/>
-        </>
+        </div>
     );
 }
