@@ -1,11 +1,10 @@
 import React, {useCallback, useState} from 'react';
-import Design1 from "./components/Design1";
+import Design1 from "./Designs/Design1";
 import CustomAppBar from "./components/Appbar";
-import Design2 from "./components/Design2";
 import {Box} from '@mui/material';
 import VerticalNavigation from "./components/VerticalNavigation";
 
-const pages = [Design1, Design2]
+const pages = [Design1]
 
 export default function App() {
     const [pageNumber, setPageNumber] = useState<number>(pages.length);
@@ -22,7 +21,7 @@ export default function App() {
     }, [pageNumber, hasPrevPage]);
 
     return (
-        <>
+        <Box sx={{backgroundColor: "#EEEEEE"}}>
             <Box sx={{
                 display: ["block", "block", "none"]
             }}>
@@ -35,7 +34,7 @@ export default function App() {
                     hasPrevPage={hasPrevPage}
                 />
             </Box>
-            <Box sx={theme=>({
+            <Box sx={theme => ({
                 display: ["none", "none", "block"],
                 position: "fixed",
                 right: "25px",
@@ -62,6 +61,6 @@ export default function App() {
             }}>
                 {pages[pageNumber - 1]()}
             </Box>
-        </>
+        </Box>
     );
 }
