@@ -3,6 +3,7 @@ import Design1 from "./Designs/Design1";
 import CustomAppBar from "./components/Appbar";
 import {Box} from '@mui/material';
 import VerticalNavigation from "./components/VerticalNavigation";
+import "./base.css"
 
 const pages = [Design1]
 
@@ -21,7 +22,7 @@ export default function App() {
     }, [pageNumber, hasPrevPage]);
 
     return (
-        <Box sx={{backgroundColor: "#EEEEEE"}}>
+        <Box>
             <Box sx={{
                 display: ["block", "block", "none"]
             }}>
