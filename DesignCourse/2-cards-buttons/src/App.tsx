@@ -38,13 +38,18 @@ export default function App() {
             <Box sx={theme => ({
                 display: ["none", "none", "block"],
                 position: "fixed",
-                right: "25px",
-                height: "195px",
-                top: "calc(50% - 195px/2)",
+                right: "19px",
+                height: "174px",
+                top: "calc(50% - 174px/2)",
                 [theme.breakpoints.up("desktop")]: {
-                    right: "32px",
-                    height: "225px",
-                    top: "calc(50% - 225px/2)",
+                    right: "39px",
+                    height: "214px",
+                    top: "calc(50% - 214px/2)",
+                },
+                [theme.breakpoints.up("fourK")]: {
+                    right: "42px",
+                    height: "383px",
+                    top: "calc(50% - 383px/2)",
                 }
             })}>
                 <VerticalNavigation
@@ -56,10 +61,10 @@ export default function App() {
                     hasPrevPage={hasPrevPage}
                 />
             </Box>
-            <Box sx={{
-                marginLeft: [0, 0, "120px", "150px"],
-                marginRight: [0, 0, "120px", "150px"]
-            }}>
+            <Box sx={() => ({
+                marginLeft: [3, 4, 12, 19, 26],
+                marginRight: [3, 4, 12, 19, 26]
+            })}>
                 {pages[pageNumber - 1]()}
             </Box>
         </Box>

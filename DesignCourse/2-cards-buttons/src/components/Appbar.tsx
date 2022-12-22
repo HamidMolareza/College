@@ -52,8 +52,8 @@ export default function CustomAppBar(props: IAppbarProps) {
             }}>
                 <ArrowRightAltIcon sx={{
                     transform: "rotate(180deg)",
-                    width: "35px",
-                    height: "35px",
+                    width: "40px",
+                    height: "40px",
                     color: props.hasPrevPage ? "#fff" : "#d0d0d0"
                 }} onClick={props.prevPage}
                 />
@@ -61,8 +61,8 @@ export default function CustomAppBar(props: IAppbarProps) {
                     {props.currentPage} of {props.allPages}
                 </Typography>
                 <ArrowRightAltIcon sx={{
-                    width: "35px",
-                    height: "35px",
+                    width: "40px",
+                    height: "40px",
                     color: props.hasNextPage ? "#fff" : "#d0d0d0"
                 }} onClick={props.nextPage}
                 />

@@ -19,18 +19,25 @@ export default function VerticalNavigation(props: IVerticalNavigationProps) {
             userSelect: "none",
             alignItems: "center",
             width: "58px",
-            [theme.breakpoints.up("desktop")]: {
+            [theme.breakpoints.only("desktop")]: {
                 width: "71px",
+            },
+            [theme.breakpoints.up("fourK")]: {
+                width: "127px",
             }
         })}>
             <ArrowCircleLeftOutlinedIcon sx={theme => ({
                 cursor: props.hasPrevPage ? "pointer" : "default",
                 color: props.hasPrevPage ? "default" : "rgba(94, 93, 93, 0.87)",
-                width: "36px",
-                height: "46px",
-                [theme.breakpoints.up("desktop")]: {
+                width: "37px",
+                height: "37px",
+                [theme.breakpoints.only("desktop")]: {
                     width: "45px",
                     height: "45px",
+                },
+                [theme.breakpoints.up("fourK")]: {
+                    width: "81px",
+                    height: "81px",
                 }
             })} onClick={props.prevPage}
             />
@@ -38,23 +45,26 @@ export default function VerticalNavigation(props: IVerticalNavigationProps) {
                 display: "flex",
                 flexDirection: "column",
                 textAlign: "center",
-                fontSize: "1.5rem",
+                fontSize: [0, 0, "1.25rem", "1.75rem", "2.5rem"],
             }}>
                 <span>{props.currentPage}</span>
                 <Box sx={{
-                    fontSize: "1.25rem"
+                    fontSize: [0, 0, "1rem", "1.25rem", "2rem"]
                 }}>of</Box>
                 <span>{props.allPages}</span>
             </Box>
             <ArrowCircleRightOutlinedIcon sx={theme => ({
-                fontSize: "30px",
                 cursor: props.hasNextPage ? "pointer" : "default",
                 color: props.hasNextPage ? "default" : "rgba(94, 93, 93, 0.87)",
-                width: "36px",
-                height: "46px",
-                [theme.breakpoints.up("desktop")]: {
+                width: "37px",
+                height: "37px",
+                [theme.breakpoints.only("desktop")]: {
                     width: "45px",
                     height: "45px",
+                },
+                [theme.breakpoints.up("fourK")]: {
+                    width: "81px",
+                    height: "81px",
                 }
             })} onClick={props.nextPage}/>
         </Box>

@@ -1,44 +1,41 @@
 import {Box, Typography} from "@mui/material";
 import {ICardData} from "./Cards";
 
-const cardWidth = "230px";
-const cardHeight = "304px";
 export default function SimpleCard(props: ICardData) {
     return (
-        <Box sx={{
+        <Box sx={() => ({
             display: "flex",
             flexDirection: "column",
-            width: cardWidth,
-            height: cardHeight,
-            justifyContent: "space-between"
-        }}>
+            justifyContent: "space-evenly",
+            width: ["272px", "223px", "196px", "186px", "319px"],
+            height: ["371px", "286px", "299px", "289px", "501px"]
+        })}>
             <Box component="img"
-                 sx={theme => ({
-                     width: cardWidth,
-                     height: "159px",
-                     borderRadius: "5px"
-                 })} src={props.imageSrc}
+                 sx={() => ({
+                     borderRadius: "5px",
+                     height: ["203px", "223px", "196px", "115px", "189px"],
+                     objectFit: "cover"
+                 })}
+                 src={props.imageSrc}
                  alt={props.imageAlt}>
             </Box>
-            <Typography variant="h6" sx={theme => ({
+            <Typography variant="h6" sx={() => ({
                 color: "#000000",
-                fontSize: "1.5rem",
-                lineHeight: "29px",
                 fontFamily: 'Inter',
                 fontStyle: "normal",
                 fontWeight: 700,
+                fontSize: ["1.75rem", "1.375rem", "1.5rem", "1.5rem", "2.5rem"],
+                lineHeight: ["34px", "27px", "29px", "29px", "50px"],
             })}>
                 {props.title}
             </Typography>
-            <Typography variant="subtitle1" sx={theme => ({
+            <Typography variant="subtitle1" sx={() => ({
                 color: "#363636",
-                fontSize: "1rem",
-                lineHeight: "20px",
                 fontFamily: 'Inter',
                 fontStyle: "normal",
                 fontWeight: 400,
-                position: "relative",
-                top: "-4px"
+                fontSize: ["1.25rem", "1rem", "1rem", "1.125", "2rem"],
+                lineHeight: ["24px", "19px", "19px", "22px", "39px"],
             })}>
                 {props.subtitle}
             </Typography>
