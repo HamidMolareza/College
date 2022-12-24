@@ -2,16 +2,17 @@ import {Box} from "@mui/material";
 import {cards} from "../Cards/Cards";
 import SimpleCard from "../Cards/SimpleCard";
 
+const gaps = [2, 2, 2, 3, 6];
+
 export default function Design1() {
     return (
         <Box sx={theme => ({
             display: "grid",
             gridTemplateColumns: "repeat(1,1fr)",
             py: 4.5,
-            gap: 6,
+            gap: gaps[0],
             [theme.breakpoints.up("tablet")]: {
                 py: 6,
-                gap: 2,
                 flexWrap: "wrap",
                 flexDirection: "row",
                 justifyContent: "flex-start"
@@ -25,12 +26,11 @@ export default function Design1() {
             },
             [theme.breakpoints.up("desktop")]: {
                 py: 12,
-                gap: 3,
+                gap: gaps[3],
                 gridTemplateColumns: "repeat(6,1fr)",
             },
             [theme.breakpoints.up("fourK")]: {
-                py: 12,
-                gap: 6,
+                gap: gaps[4],
                 gridTemplateColumns: "repeat(5,1fr)",
             },
         })}>
@@ -39,6 +39,7 @@ export default function Design1() {
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "center",
+                    marginBottom: [6 - gaps[0], 5.5 - gaps[1], 6.5 - gaps[2], 7.5 - gaps[3], 12.75 - gaps[4]]
                 })}>
                     <SimpleCard
                         imageSrc={card.imageSrc}

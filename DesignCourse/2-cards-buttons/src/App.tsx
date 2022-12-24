@@ -39,17 +39,17 @@ export default function App() {
                 display: ["none", "none", "block"],
                 position: "fixed",
                 right: "19px",
-                height: "174px",
-                top: "calc(50% - 174px/2)",
+                height: "160px",
+                top: "calc(50% - 160px/2)",
                 [theme.breakpoints.up("desktop")]: {
                     right: "39px",
-                    height: "214px",
-                    top: "calc(50% - 214px/2)",
+                    height: "205px",
+                    top: "calc(50% - 205px/2)",
                 },
                 [theme.breakpoints.up("fourK")]: {
                     right: "42px",
-                    height: "383px",
-                    top: "calc(50% - 383px/2)",
+                    height: "335px",
+                    top: "calc(50% - 335px/2)",
                 }
             })}>
                 <VerticalNavigation
