@@ -8,7 +8,7 @@ export default function Card2(props: ICardData) {
             flexDirection: "column",
             backgroundColor: "#1F1F1F",
             borderRadius: "5px 5px 0px 0px",
-            width: ["287px", "228px", "202px", "196px", "337px"],
+            width: ["272px", "223px", "196px", "186px", "319px"],
             minHeight: ["330px", "245px", "240px", "240px", "440px"],
         })}>
             <Box component="img"

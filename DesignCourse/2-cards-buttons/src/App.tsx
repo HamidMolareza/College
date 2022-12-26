@@ -5,8 +5,9 @@ import {Box} from '@mui/material';
 import VerticalNavigation from "./components/VerticalNavigation";
 import "./base.css"
 import Design2 from "./Designs/Design2";
+import Design3 from "./Designs/Design3";
 
-const pages = [Design1, Design2]
+const pages = [Design1, Design2, Design3]
 
 export default function App() {
     const [pageNumber, setPageNumber] = useState<number>(pages.length);
@@ -62,7 +63,12 @@ export default function App() {
                     hasPrevPage={hasPrevPage}
                 />
             </Box>
-            {pages[pageNumber - 1]()}
+            <Box sx={{
+                marginLeft: [3, 4, 12, 19, 26],
+                marginRight: [3, 4, 12, 19, 26]
+            }}>
+                {pages[pageNumber - 1]()}
+            </Box>
         </Box>
     );
 }
