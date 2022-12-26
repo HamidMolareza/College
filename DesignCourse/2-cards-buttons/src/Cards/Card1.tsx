@@ -1,7 +1,7 @@
 import {Box, Typography} from "@mui/material";
 import {ICardData} from "./Cards";
 
-export default function SimpleCard(props: ICardData) {
+export default function Card1(props: ICardData) {
     return (
         <Box sx={() => ({
             display: "flex",
