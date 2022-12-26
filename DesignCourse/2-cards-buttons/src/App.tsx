@@ -6,8 +6,9 @@ import VerticalNavigation from "./components/VerticalNavigation";
 import "./base.css"
 import Design2 from "./Designs/Design2";
 import Design3 from "./Designs/Design3";
+import Design4 from "./Designs/Design4";
 
-const pages = [Design1, Design2, Design3]
+const pages = [Design1, Design2, Design3, Design4]
 
 export default function App() {
     const [pageNumber, setPageNumber] = useState<number>(pages.length);

@@ -39,7 +39,7 @@ root.render(
     <React.StrictMode>
         <CssBaseline/>
         <ThemeProvider theme={theme}>
-            <Box sx={{backgroundColor: "#eceaea"}}>
+            <Box sx={{backgroundColor: "#EEEEEE"}}>
                 <App/>
             </Box>
         </ThemeProvider>
