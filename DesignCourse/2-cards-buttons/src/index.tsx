@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+import {Box, createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 
 declare module '@mui/material/styles' {
     interface BreakpointOverrides {
@@ -39,7 +39,9 @@ root.render(
     <React.StrictMode>
         <CssBaseline/>
         <ThemeProvider theme={theme}>
-            <App/>
+            <Box sx={{backgroundColor: "#eceaea"}}>
+                <App/>
+            </Box>
         </ThemeProvider>
     </React.StrictMode>
 );
